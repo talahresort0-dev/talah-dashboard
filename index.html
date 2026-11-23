@@ -90,18 +90,18 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 <p class="updated" id="updated"></p>
 </div><svg class="waves" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 200 0, 400 46, 600 24 S 1000 0, 1200 26 L1200 46 L0 46 Z" fill="var(--page)" opacity=".55"/><path d="M0 38 C 250 18, 450 46, 700 32 S 1050 20, 1200 36 L1200 46 L0 46 Z" fill="var(--page)"/></svg></header>
 <div class="wrap">
-<div class="card lead-card"><p class="lead">في التحديد الحالي <b id="lead-n">—</b> مراجعة، متوسطها <b id="lead-avg">—</b> من ١٠، وأكثر موضوع يشتكي منه الضيوف فيها: «<b id="lead-top">—</b>».</p></div>
+<div class="card lead-card"><p class="lead">في التحديد الحالي <b id="lead-n">—</b> مراجعة، متوسطها <b id="lead-avg">—</b> من 10، وأكثر موضوع يشتكي منه الضيوف فيها: «<b id="lead-top">—</b>».</p></div>
 
 <div class="card filters-card">
 <p class="filters-title">الفلاتر</p>
 <div class="filters">
 <span class="flabel">من شهر</span><select id="f-from" aria-label="من شهر"><option value="">من: البداية</option></select>
 <span class="flabel">إلى شهر</span><select id="f-to" aria-label="إلى شهر"><option value="">إلى: آخر شهر</option></select>
-<div class="quick" id="quick"><button type="button" data-m="1">آخر شهر</button><button type="button" data-m="3">آخر ٣ أشهر</button><button type="button" data-m="6">آخر ٦ أشهر</button><button type="button" data-m="12">آخر ١٢ شهراً</button></div>
+<div class="quick" id="quick"><button type="button" data-m="1">آخر شهر</button><button type="button" data-m="3">آخر 3 أشهر</button><button type="button" data-m="6">آخر 6 أشهر</button><button type="button" data-m="12">آخر 12 شهراً</button></div>
 </div>
 <div class="filters">
 <select id="f-platform" aria-label="المنصة"><option value="">كل المنصات</option><option value="قوقل">قوقل ماب</option><option value="بوكينق">بوكينق</option></select>
-<select id="f-mood" aria-label="نوع التقييم"><option value="">كل التقييمات</option><option value="pos">إيجابية (٨ فأعلى من ١٠)</option><option value="mid">متوسطة (٦ إلى أقل من ٨)</option><option value="neg">سلبية (أقل من ٦)</option></select>
+<select id="f-mood" aria-label="نوع التقييم"><option value="">كل التقييمات</option><option value="pos">إيجابية (8 فأعلى من 10)</option><option value="mid">متوسطة (6 إلى أقل من 8)</option><option value="neg">سلبية (أقل من 6)</option></select>
 <select id="f-topic" aria-label="موضوع الشكوى"><option value="">كل المواضيع</option></select>
 <input id="f-q" type="search" placeholder="ابحث في نص التعليقات… مثل: مسبح، سعود، نمل" aria-label="بحث في التعليقات">
 <button id="f-reset" type="button">مسح الفلاتر</button>
@@ -111,36 +111,36 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 
 <div class="kpis">
 <div class="card"><div class="kpi-label">عدد المراجعات</div><div class="kpi-val" id="k-n">—</div><div class="kpi-note">في التحديد الحالي</div></div>
-<div class="card"><div class="kpi-label">متوسط قوقل</div><div class="kpi-val" id="k-g">—</div><div class="kpi-note">نجوم من ٥</div></div>
-<div class="card"><div class="kpi-label">متوسط بوكينق</div><div class="kpi-val" id="k-b">—</div><div class="kpi-note">من ١٠ (متوسط بسيط)</div></div>
-<div class="card warn"><div class="kpi-label">نسبة التقييمات السلبية</div><div class="kpi-val" id="k-neg">—</div><div class="kpi-note">أقل من ٦ من ١٠ (نجمة أو نجمتان)</div></div>
+<div class="card"><div class="kpi-label">متوسط قوقل</div><div class="kpi-val" id="k-g">—</div><div class="kpi-note">نجوم من 5</div></div>
+<div class="card"><div class="kpi-label">متوسط بوكينق</div><div class="kpi-val" id="k-b">—</div><div class="kpi-note">من 10 (متوسط بسيط)</div></div>
+<div class="card warn"><div class="kpi-label">نسبة التقييمات السلبية</div><div class="kpi-val" id="k-neg">—</div><div class="kpi-note">أقل من 6 من 10 (نجمة أو نجمتان)</div></div>
 <div class="card warn"><div class="kpi-label">نسبة الرد على قوقل</div><div class="kpi-val" id="k-rep">—</div><div class="kpi-note">مراجعات قوقل التي ردّت عليها الإدارة</div></div>
 </div>
 
-<div class="card" style="margin-bottom:12px"><h2>المراجعات والتقييم شهراً بشهر</h2><p class="sub">الأعمدة: عدد المراجعات في كل شهر. الخط: متوسط التقييم من ١٠. اضغط على أي شهر لعرضه وحده. يعرض آخر ١٢ شهراً ما لم تحدد فترة. مراجعات قوقل الأقدم من سنة لا تدخل في الرسم ولا في الفلترة الشهرية، لأن قوقل لا يعطي شهرها بل يكتب «قبل سنة» أو «قبل سنتين»، أما بوكينق فتواريخه دقيقة.</p><div class="chart" id="c-months"></div></div>
+<div class="card" style="margin-bottom:12px"><h2>المراجعات والتقييم شهراً بشهر</h2><p class="sub">الأعمدة: عدد المراجعات في كل شهر. الخط: متوسط التقييم من 10. اضغط على أي شهر لعرضه وحده. يعرض آخر 12 شهراً ما لم تحدد فترة. مراجعات قوقل الأقدم من سنة لا تدخل في الرسم ولا في الفلترة الشهرية، لأن قوقل لا يعطي شهرها بل يكتب «قبل سنة» أو «قبل سنتين»، أما بوكينق فتواريخه دقيقة.</p><div class="chart" id="c-months"></div></div>
 
 <div class="grid2">
 <div class="card"><h2>الشكاوى حسب الموضوع</h2><p class="sub">عدد المراجعات التي تشتكي صراحة من كل موضوع. اضغط على أي شريط لعرض تعليقاته.</p><div class="chart" id="c-topics"></div></div>
 <div class="card"><h2>ما يمدحه الضيوف</h2><p class="sub">عدد المراجعات الإيجابية التي تذكر كل موضوع بلا شكوى.</p><div class="chart" id="c-praise"></div></div>
 </div>
 <div class="grid2">
-<div class="card"><h2>متوسط التقييم حسب الفترة</h2><p class="sub">من ١٠، لكل المنصات في التحديد. تواريخ قوقل تقريبية كما يعرضها.</p><div class="chart" id="c-trend"></div></div>
+<div class="card"><h2>متوسط التقييم حسب الفترة</h2><p class="sub">من 10، لكل المنصات في التحديد. تواريخ قوقل تقريبية كما يعرضها.</p><div class="chart" id="c-trend"></div></div>
 <div class="card"><h2>نسبة الرد على مراجعات قوقل حسب الفترة</h2><p class="sub">الأزرق: كل المراجعات. الأحمر: مراجعات النجمة والنجمتين.</p><div class="chart" id="c-reply"></div></div>
 </div>
-<div class="card" style="margin-bottom:12px"><h2>فئات بوكينق حسب السنة</h2><p class="sub">متوسط كل فئة من ١٠. الدائرة الأغمق هي أحدث سنة، والرقم بجانبها قيمتها.</p><div class="chart" id="c-bcats"></div></div>
+<div class="card" style="margin-bottom:12px"><h2>فئات بوكينق حسب السنة</h2><p class="sub">متوسط كل فئة من 10. الدائرة الأغمق هي أحدث سنة، والرقم بجانبها قيمتها.</p><div class="chart" id="c-bcats"></div></div>
 
 <div class="card"><h2>التعليقات</h2><p class="sub" id="list-note">—</p>
 <div class="tbl-wrap"><table><thead><tr><th>المنصة</th><th>التقييم</th><th>الشهر</th><th>التعليق</th><th>الشكاوى</th><th>رُدّ عليه</th></tr></thead><tbody id="list"></tbody></table></div></div>
 
-<details><summary>كيف حُسبت الأرقام</summary><p>المصدر: كل مراجعات قوقل ماب التي يعرضها قوقل، وكل تقييمات لوحة شركاء بوكينق. وحّدنا التقييم على ١٠: نجوم قوقل × ٢. «سلبي» أقل من ٦ (أي نجمة أو نجمتان في قوقل)، و«إيجابي» ٨ فأعلى. صُنّفت المواضيع آلياً بكلمات مفتاحية عربية وإنجليزية: الشكوى تعني عبارة سلبية صريحة، والمدح يعني ذكر الموضوع في تقييم إيجابي بلا شكوى. لذلك الأعداد تقريبية وغرضها ترتيب الأولويات. نحو ربع تعليقات قوقل الطويلة يعرضها قوقل مقطوعة. تتحدث البيانات أسبوعياً.</p></details>
+<details><summary>كيف حُسبت الأرقام</summary><p>المصدر: كل مراجعات قوقل ماب التي يعرضها قوقل، وكل تقييمات لوحة شركاء بوكينق. وحّدنا التقييم على 10: نجوم قوقل × 2. «سلبي» أقل من 6 (أي نجمة أو نجمتان في قوقل)، و«إيجابي» 8 فأعلى. صُنّفت المواضيع آلياً بكلمات مفتاحية عربية وإنجليزية: الشكوى تعني عبارة سلبية صريحة، والمدح يعني ذكر الموضوع في تقييم إيجابي بلا شكوى. لذلك الأعداد تقريبية وغرضها ترتيب الأولويات. نحو ربع تعليقات قوقل الطويلة يعرضها قوقل مقطوعة. تتحدث البيانات أسبوعياً.</p></details>
 </div>
 
 <script>
 (function(){
 const PERIODS=['قبل 4 سنوات فأكثر','قبل 3 سنوات','قبل سنتين','قبل سنة','آخر 12 شهراً'];
-const SHORTP={'قبل 4 سنوات فأكثر':'٤ سنوات+','قبل 3 سنوات':'٣ سنوات','قبل سنتين':'سنتان','قبل سنة':'سنة','آخر 12 شهراً':'آخر ١٢ شهراً'};
+const SHORTP={'قبل 4 سنوات فأكثر':'4 سنوات+','قبل 3 سنوات':'3 سنوات','قبل سنتين':'سنتان','قبل سنة':'سنة','آخر 12 شهراً':'آخر 12 شهراً'};
 const TOPICS=['نظافة مياه المسابح','النظافة العامة','الأثاث والصيانة','الحشرات والقطط','السعر والقيمة','مواعيد التشغيل','الموقع والمسافة','الرقابة والسلامة','الموظفون والاستقبال','الحجز والتأمين','الرد على الهاتف','الإنترنت والتغطية','الطعام والكوفي','المستلزمات','تدفئة المسبح','انقطاع الكهرباء والماء','رسوم الزيارة اليومية','مرافق النساء','ذوو الإعاقة','التصميم والمساحة','الخصوصية والهدوء','مناسب للعائلات'];
-const nf=new Intl.NumberFormat('ar-SA'),nf1=new Intl.NumberFormat('ar-SA',{minimumFractionDigits:1,maximumFractionDigits:1}),nf2=new Intl.NumberFormat('ar-SA',{minimumFractionDigits:2,maximumFractionDigits:2});
+const nf=new Intl.NumberFormat('en-US'),nf1=new Intl.NumberFormat('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}),nf2=new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const mean=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
@@ -211,13 +211,13 @@ function months(el,rs){
  let path='';data.forEach((d,i)=>{const cx=xl+i*band+band/2;if(d.avg!=null){const yy=ay(Math.max(4,d.avg));path+=(path?'L':'M')+cx+' '+yy;}});
  s+=`<path d="${path}" fill="none" stroke="${css('--sand')}" stroke-width="2.5"/>`;
  data.forEach((d,i)=>{const cx=xl+i*band+band/2,sel=P.from===d.m&&P.to===d.m;
-  s+=`<g data-m="${d.m}" style="cursor:pointer"><title>${fmtMonth(d.m)}: ${nf.format(d.n)} مراجعة${d.avg!=null?' · متوسط '+nf2.format(d.avg)+' من ١٠':''}</title><rect x="${xl+i*band}" y="${top-10}" width="${band}" height="${base-top+30}" fill="transparent"/>`;
+  s+=`<g data-m="${d.m}" style="cursor:pointer"><title>${fmtMonth(d.m)}: ${nf.format(d.n)} مراجعة${d.avg!=null?' · متوسط '+nf2.format(d.avg)+' من 10':''}</title><rect x="${xl+i*band}" y="${top-10}" width="${band}" height="${base-top+30}" fill="transparent"/>`;
   if(d.n)s+=`<rect x="${cx-bw/2}" y="${ny(d.n)}" width="${bw}" height="${base-ny(d.n)}" rx="2" fill="${sel?css('--accent'):css('--accent-soft')}"/>`;
   if(d.n&&(band>=26||i===data.length-1))s+=`<text x="${cx}" y="${ny(d.n)-4}" text-anchor="middle" font-size="10" fill="${css('--muted')}">${nf.format(d.n)}</text>`;
   if(d.avg!=null)s+=`<circle cx="${cx}" cy="${ay(Math.max(4,d.avg))}" r="${d.avg<7?4.5:3}" fill="${d.avg<7?css('--bad'):css('--sand')}"/>`;
   if(i%labEvery===0||i===data.length-1)s+=`<text x="${cx}" y="${base+16}" text-anchor="middle" font-size="11" fill="${css('--muted')}">${fmtMonth(d.m,true)}</text>`;
   s+='</g>';});
- s+=`<text x="${xl}" y="${top-12}" font-size="11" fill="${css('--muted')}" text-anchor="start">متوسط التقييم من ١٠ (النقطة الحمراء: أقل من ٧)</text>`;
+ s+=`<text x="${xl}" y="${top-12}" font-size="11" fill="${css('--muted')}" text-anchor="start">متوسط التقييم من 10 (النقطة الحمراء: أقل من 7)</text>`;
  el.innerHTML=s+'</svg>';
  el.querySelectorAll('g[data-m]').forEach(g=>g.addEventListener('click',()=>{const m=g.dataset.m;if(P.from===m&&P.to===m){P.from='';P.to='';}else{P.from=m;P.to=m;}sync();render();}));
 }
@@ -228,8 +228,8 @@ function render(){
  $('lead-avg').textContent=avg==null?'—':nf2.format(avg);
  $('k-g').textContent=g.length?nf2.format(mean(g.map(r=>+r.stars))):'—';
  $('k-b').textContent=b.length?nf2.format(mean(b.map(r=>+r.score10))):'—';
- $('k-neg').textContent=n?nf.format(Math.round(rs.filter(r=>mood(r)==='neg').length/n*100))+'٪':'—';
- $('k-rep').textContent=g.length?nf.format(Math.round(g.filter(r=>r.replied==='1').length/g.length*100))+'٪':'—';
+ $('k-neg').textContent=n?nf.format(Math.round(rs.filter(r=>mood(r)==='neg').length/n*100))+'%':'—';
+ $('k-rep').textContent=g.length?nf.format(Math.round(g.filter(r=>r.replied==='1').length/g.length*100))+'%':'—';
  const tr=filt('topic');const topics=TOPICS.map(t=>({topic:t,complaints:tr.filter(r=>has(r.complaints,t)).length,praise:tr.filter(r=>has(r.praise,t)).length}));
  const comp=topics.filter(d=>d.complaints>0).sort((a,b)=>b.complaints-a.complaints);
  $('lead-top').textContent=comp.length?comp[0].topic:'—';
@@ -237,14 +237,14 @@ function render(){
  hbars($('c-praise'),topics.filter(d=>d.praise>0).sort((a,b)=>b.praise-a.praise).slice(0,10),'topic','praise',()=>css('--accent-soft'));
  const pr=filt('period');const per=PERIODS.map(p=>{const a=pr.filter(r=>r.period===p),gg=a.filter(r=>r.platform==='قوقل'),gn=gg.filter(r=>mood(r)==='neg');return{period:p,n:a.length,avg10:a.length?mean(a.map(r=>+r.score10)):null,rep:gg.length?Math.round(gg.filter(r=>r.replied==='1').length/gg.length*100):null,repneg:gn.length?Math.round(gn.filter(r=>r.replied==='1').length/gn.length*100):null};});
  vbars($('c-trend'),per.filter(r=>r.n>0),'avg10',null,10,v=>nf2.format(v));
- vbars($('c-reply'),per.filter(r=>r.rep!=null),'rep','repneg',100,v=>nf.format(v)+'٪');
+ vbars($('c-reply'),per.filter(r=>r.rep!=null),'rep','repneg',100,v=>nf.format(v)+'%');
  const bb=filt('platform',{period:''}).filter(r=>r.platform==='بوكينق'),years=[...new Set(bb.map(r=>r.month.slice(0,4)))].sort(),out=[];
  [['staff','طاقم العمل'],['clean','النظافة'],['comfort','الراحة'],['facilities','المرافق'],['location','الموقع'],['value','القيمة مقابل المال']].forEach(([k,nm])=>years.forEach(yv=>{const v=bb.filter(r=>r.month.slice(0,4)===yv&&r[k]!=='').map(r=>+r[k]);if(v.length)out.push({category:nm,year:yv,avg:mean(v),n:v.length});}));
  bcats($('c-bcats'),out);
  months($('c-months'),filt('month',{from:P.from&&P.from===P.to?'':P.from,to:P.from&&P.from===P.to?'':P.to}));
  const list=rs.filter(r=>r.text).sort((a,b)=>(b.month||'').localeCompare(a.month||'')).slice(0,200);
  $('list-note').textContent=list.length?('يعرض أحدث '+nf.format(list.length)+' تعليق مكتوب من المراجعات المطابقة للفلاتر. التواريخ تقريبية لقوقل.'):'لا توجد تعليقات مكتوبة تطابق الفلاتر.';
- $('list').innerHTML=list.map(r=>{const m=mood(r),rating=r.platform==='قوقل'?(r.stars+' من ٥'):(r.score10+' من ١٠'),tags=(r.complaints||'').split('|').filter(Boolean);
+ $('list').innerHTML=list.map(r=>{const m=mood(r),rating=r.platform==='قوقل'?(r.stars+' من 5'):(r.score10+' من 10'),tags=(r.complaints||'').split('|').filter(Boolean);
   return `<tr><td class="nw" data-label="المنصة">${esc(r.platform)}</td><td class="nw ${m==='neg'?'neg':(m==='pos'?'pos':'')}" data-label="التقييم">${esc(rating)}</td><td class="nw muted" data-label="الشهر">${esc(r.month)}</td><td class="txt">${esc(r.text).replace(/\n/g,'<br>')}</td><td${tags.length?' data-label="الشكاوى"':''}>${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</td><td class="nw ${r.replied==='1'?'':'muted'}" data-label="رُدّ عليه">${r.replied==='1'?'نعم':'لا'}</td></tr>`;}).join('');
  const chip=$('chip');chip.innerHTML='';if(P.from||P.to){const s=document.createElement('span');s.textContent='الفترة: '+(P.from&&P.from===P.to?fmtMonth(P.from):((P.from?'من '+fmtMonth(P.from):'من البداية')+' '+(P.to?'إلى '+fmtMonth(P.to):'حتى آخر شهر')));const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.from='';P.to='';sync();render();};chip.append(s,bt);}
  if(P.topic){const s=document.createElement('span');s.textContent='معروض الآن: شكاوى «'+P.topic+'»';const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.topic='';sync();render();};chip.append(s,bt);}
@@ -263,7 +263,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
 
 $('list-note').textContent='جارٍ تحميل البيانات…';
 Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)])
- .then(([csv,u])=>{ROWS=parseCSV(csv);fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
+ .then(([csv,u])=>{ROWS=parseCSV(csv);fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
  .catch(()=>{$('list-note').textContent='تعذّر تحميل البيانات. حدّث الصفحة بعد قليل.';});
 })();
 </script>
