@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة تقييمات منتجع وشاليهات تالة</title>
+<style>
+:root{--page:#f4efe5;--page2:#e9f2ef;--bg:#ffffff;--panel:#ffffff;--fg:#1f2a28;--muted:#66706d;--line:#e2e0d8;--accent:#1f7a6d;--accent-soft:rgba(31,122,109,.45);--bad:#c0392b;--bad-soft:rgba(192,57,43,.72);--ok:#2e7d4f;--grid:#eceae3;--radius:14px;--shadow:0 1px 2px rgba(30,40,38,.06),0 6px 18px rgba(30,40,38,.06);--hero1:#0e4f4a;--hero2:#1f8a78;--sand:#d9b77e}
+@media (prefers-color-scheme: dark){:root{--page:#121816;--page2:#0f1513;--bg:#1a2220;--panel:#1a2220;--fg:#e8ece9;--muted:#9aa5a1;--line:#2c3734;--accent:#4fc0ac;--accent-soft:rgba(79,192,172,.45);--bad:#e57364;--bad-soft:rgba(229,115,100,.8);--ok:#5dbb85;--grid:#26302d;--shadow:0 1px 2px rgba(0,0,0,.3);--hero1:#0b3b37;--hero2:#14695d}}
+*{box-sizing:border-box}
+body{margin:0;color:var(--fg);font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif;line-height:1.6;background:radial-gradient(1200px 500px at 100% 0%,rgba(217,183,126,.18),transparent 60%),linear-gradient(180deg,var(--page) 0%,var(--page2) 100%);background-attachment:fixed;min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--hero1) 0%,var(--hero2) 100%);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -60px -10%;height:120px;background:radial-gradient(60% 100% at 50% 100%,rgba(217,183,126,.35),transparent 70%)}
+.hero svg.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:46px;display:block}
+.hero-in{max-width:1200px;margin:0 auto;padding:28px 16px 58px;position:relative;z-index:1}
+.hero h1{color:#fff}
+.hero .tagline{margin:0;opacity:.9;font-size:15px}
+.hero .updated{color:rgba(255,255,255,.78);margin:6px 0 0}
+.wrap{max-width:1200px;margin:-30px auto 0;padding:0 16px 40px;position:relative;z-index:2}
+h1{font-size:30px;font-weight:700;margin:0 0 4px;letter-spacing:-.2px}
+h2{font-size:17px;font-weight:600;margin:0 0 2px}
+.lead{margin:0;font-size:16px}
+.lead-card{border-inline-start:4px solid var(--sand);margin-bottom:14px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+.updated{color:var(--muted);font-size:13px;margin:0 0 14px}
+.filters-card{margin-bottom:14px}
+.filters-title{font-size:13px;color:var(--muted);margin:0 0 8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters + .filters{margin-top:8px}
+.flabel{font-size:13px;color:var(--muted)}
+select,input[type=search],button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+select{min-width:130px}
+select:focus,input:focus,button:focus{outline:2px solid var(--accent-soft);outline-offset:1px}
+input[type=search]{flex:1 1 200px;min-width:160px}
+button{background:var(--page);cursor:pointer}
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button{border-radius:999px;padding:4px 12px;font-size:13px}
+.quick button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chip{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:8px 0 0}
+.chip:empty{display:none}
+.chip button{border-radius:999px;padding:2px 10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.kpis .card{border-top:3px solid var(--accent)}
+.kpis .card.warn{border-top-color:var(--bad)}
+.kpi-label{color:var(--muted);font-size:13px}
+.kpi-val{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi-note{color:var(--muted);font-size:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px;margin-bottom:12px}
+.chart{position:relative;min-height:200px}
+.chart svg{display:block;width:100%;direction:ltr;overflow:visible}
+.chart text{font-family:inherit}
+.tbl-wrap{overflow-x:auto;max-height:680px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{position:sticky;top:0;background:var(--panel);text-align:right;font-weight:600;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.txt{min-width:300px}
+td.nw{white-space:nowrap;font-variant-numeric:tabular-nums}
+.neg{color:var(--bad)}.pos{color:var(--ok)}.muted{color:var(--muted)}
+.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;margin:2px;color:var(--bad)}
+details{margin-top:18px;color:var(--muted);font-size:13px}
+.msg{color:var(--muted);padding:20px 0}
+@media (max-width:640px){
+ .wrap{padding:14px 12px 30px}
+ h1{font-size:22px}
+ .lead{font-size:15px}
+ select,input[type=search],.filters>button{flex:1 1 100%;width:100%;min-width:0}
+ #f-from,#f-to{flex:1 1 40%;width:auto}
+ .flabel{display:none}
+ .quick{flex:1 1 100%}
+ .quick button{flex:1 1 40%}
+ .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .kpi-val{font-size:24px}
+ .card{padding:12px}
+ .tbl-wrap{max-height:none;overflow:visible}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:100%}
+ tr{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:8px;padding:8px 12px;background:var(--bg)}
+ td{border:0;padding:2px 0}
+ td.txt{min-width:0}
+ td:empty{display:none}
+ td[data-label]::before{content:attr(data-label) "\00a0:\00a0";color:var(--muted);font-size:12px}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in">
+<h1>لوحة تقييمات منتجع وشاليهات تالة</h1>
+<p class="tagline">تحليل آراء الضيوف في قوقل ماب وبوكينق: ما يمدحونه، وما يشتكون منه، وكيف يتغير مع الوقت.</p>
+<p class="updated" id="updated"></p>
+</div><svg class="waves" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 200 0, 400 46, 600 24 S 1000 0, 1200 26 L1200 46 L0 46 Z" fill="var(--page)" opacity=".55"/><path d="M0 38 C 250 18, 450 46, 700 32 S 1050 20, 1200 36 L1200 46 L0 46 Z" fill="var(--page)"/></svg></header>
+<div class="wrap">
+<div class="card lead-card"><p class="lead">في التحديد الحالي <b id="lead-n">—</b> مراجعة، متوسطها <b id="lead-avg">—</b> من ١٠، وأكثر موضوع يشتكي منه الضيوف فيها: «<b id="lead-top">—</b>».</p></div>
+
+<div class="card filters-card">
+<p class="filters-title">الفلاتر</p>
+<div class="filters">
+<span class="flabel">من شهر</span><select id="f-from" aria-label="من شهر"><option value="">من: البداية</option></select>
+<span class="flabel">إلى شهر</span><select id="f-to" aria-label="إلى شهر"><option value="">إلى: آخر شهر</option></select>
+<div class="quick" id="quick"><button type="button" data-m="1">آخر شهر</button><button type="button" data-m="3">آخر ٣ أشهر</button><button type="button" data-m="6">آخر ٦ أشهر</button><button type="button" data-m="12">آخر ١٢ شهراً</button></div>
+</div>
+<div class="filters">
+<select id="f-platform" aria-label="المنصة"><option value="">كل المنصات</option><option value="قوقل">قوقل ماب</option><option value="بوكينق">بوكينق</option></select>
+<select id="f-mood" aria-label="نوع التقييم"><option value="">كل التقييمات</option><option value="pos">إيجابية (٨ فأعلى من ١٠)</option><option value="mid">متوسطة (٦ إلى أقل من ٨)</option><option value="neg">سلبية (أقل من ٦)</option></select>
+<select id="f-topic" aria-label="موضوع الشكوى"><option value="">كل المواضيع</option></select>
+<input id="f-q" type="search" placeholder="ابحث في نص التعليقات… مثل: مسبح، سعود، نمل" aria-label="بحث في التعليقات">
+<button id="f-reset" type="button">مسح الفلاتر</button>
+</div>
+<div class="chip" id="chip"></div>
+</div>
+
+<div class="kpis">
+<div class="card"><div class="kpi-label">عدد المراجعات</div><div class="kpi-val" id="k-n">—</div><div class="kpi-note">في التحديد الحالي</div></div>
+<div class="card"><div class="kpi-label">متوسط قوقل</div><div class="kpi-val" id="k-g">—</div><div class="kpi-note">نجوم من ٥</div></div>
+<div class="card"><div class="kpi-label">متوسط بوكينق</div><div class="kpi-val" id="k-b">—</div><div class="kpi-note">من ١٠ (متوسط بسيط)</div></div>
+<div class="card warn"><div class="kpi-label">نسبة التقييمات السلبية</div><div class="kpi-val" id="k-neg">—</div><div class="kpi-note">أقل من ٦ من ١٠ (نجمة أو نجمتان)</div></div>
+<div class="card warn"><div class="kpi-label">نسبة الرد على قوقل</div><div class="kpi-val" id="k-rep">—</div><div class="kpi-note">مراجعات قوقل التي ردّت عليها الإدارة</div></div>
+</div>
+
+<div class="card" style="margin-bottom:12px"><h2>المراجعات والتقييم شهراً بشهر</h2><p class="sub">الأعمدة: عدد المراجعات في كل شهر. الخط: متوسط التقييم من ١٠. اضغط على أي شهر لعرضه وحده. يعرض آخر ١٢ شهراً ما لم تحدد فترة. مراجعات قوقل الأقدم من سنة لا تدخل في الرسم ولا في الفلترة الشهرية، لأن قوقل لا يعطي شهرها بل يكتب «قبل سنة» أو «قبل سنتين»، أما بوكينق فتواريخه دقيقة.</p><div class="chart" id="c-months"></div></div>
+
+<div class="grid2">
+<div class="card"><h2>الشكاوى حسب الموضوع</h2><p class="sub">عدد المراجعات التي تشتكي صراحة من كل موضوع. اضغط على أي شريط لعرض تعليقاته.</p><div class="chart" id="c-topics"></div></div>
+<div class="card"><h2>ما يمدحه الضيوف</h2><p class="sub">عدد المراجعات الإيجابية التي تذكر كل موضوع بلا شكوى.</p><div class="chart" id="c-praise"></div></div>
+</div>
+<div class="grid2">
+<div class="card"><h2>متوسط التقييم حسب الفترة</h2><p class="sub">من ١٠، لكل المنصات في التحديد. تواريخ قوقل تقريبية كما يعرضها.</p><div class="chart" id="c-trend"></div></div>
+<div class="card"><h2>نسبة الرد على مراجعات قوقل حسب الفترة</h2><p class="sub">الأزرق: كل المراجعات. الأحمر: مراجعات النجمة والنجمتين.</p><div class="chart" id="c-reply"></div></div>
+</div>
+<div class="card" style="margin-bottom:12px"><h2>فئات بوكينق حسب السنة</h2><p class="sub">متوسط كل فئة من ١٠. الدائرة الأغمق هي أحدث سنة، والرقم بجانبها قيمتها.</p><div class="chart" id="c-bcats"></div></div>
+
+<div class="card"><h2>التعليقات</h2><p class="sub" id="list-note">—</p>
+<div class="tbl-wrap"><table><thead><tr><th>المنصة</th><th>التقييم</th><th>الشهر</th><th>التعليق</th><th>الشكاوى</th><th>رُدّ عليه</th></tr></thead><tbody id="list"></tbody></table></div></div>
+
+<details><summary>كيف حُسبت الأرقام</summary><p>المصدر: كل مراجعات قوقل ماب التي يعرضها قوقل، وكل تقييمات لوحة شركاء بوكينق. وحّدنا التقييم على ١٠: نجوم قوقل × ٢. «سلبي» أقل من ٦ (أي نجمة أو نجمتان في قوقل)، و«إيجابي» ٨ فأعلى. صُنّفت المواضيع آلياً بكلمات مفتاحية عربية وإنجليزية: الشكوى تعني عبارة سلبية صريحة، والمدح يعني ذكر الموضوع في تقييم إيجابي بلا شكوى. لذلك الأعداد تقريبية وغرضها ترتيب الأولويات. نحو ربع تعليقات قوقل الطويلة يعرضها قوقل مقطوعة. تتحدث البيانات أسبوعياً.</p></details>
+</div>
+
+<script>
+(function(){
+const PERIODS=['قبل 4 سنوات فأكثر','قبل 3 سنوات','قبل سنتين','قبل سنة','آخر 12 شهراً'];
+const SHORTP={'قبل 4 سنوات فأكثر':'٤ سنوات+','قبل 3 سنوات':'٣ سنوات','قبل سنتين':'سنتان','قبل سنة':'سنة','آخر 12 شهراً':'آخر ١٢ شهراً'};
+const TOPICS=['نظافة مياه المسابح','النظافة العامة','الأثاث والصيانة','الحشرات والقطط','السعر والقيمة','مواعيد التشغيل','الموقع والمسافة','الرقابة والسلامة','الموظفون والاستقبال','الحجز والتأمين','الرد على الهاتف','الإنترنت والتغطية','الطعام والكوفي','المستلزمات','تدفئة المسبح','انقطاع الكهرباء والماء','رسوم الزيارة اليومية','مرافق النساء','ذوو الإعاقة','التصميم والمساحة','الخصوصية والهدوء','مناسب للعائلات'];
+const nf=new Intl.NumberFormat('ar-SA'),nf1=new Intl.NumberFormat('ar-SA',{minimumFractionDigits:1,maximumFractionDigits:1}),nf2=new Intl.NumberFormat('ar-SA',{minimumFractionDigits:2,maximumFractionDigits:2});
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mean=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
+const mood=r=>{const s=+r.score10;return s>=8?'pos':(s>=6?'mid':'neg');};
+const has=(f,t)=>(f||'').split('|').indexOf(t)>=0;
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let ROWS=[];const P={platform:'',period:'',mood:'',topic:'',q:'',from:'',to:''};
+const AR_M=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const fmtMonth=(m,short)=>{const [y,mo]=m.split('-').map(Number);return (short?AR_M[mo-1].slice(0,5):AR_M[mo-1])+' '+(short?String(y).slice(2):y);};
+const addMonths=(m,k)=>{let [y,mo]=m.split('-').map(Number);mo+=k;while(mo<=0){mo+=12;y--;}while(mo>12){mo-=12;y++;}return y+'-'+String(mo).padStart(2,'0');};
+
+function parseCSV(text){const out=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(q){if(c=='"'){if(text[i+1]=='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c=='"')q=true;else if(c==','){row.push(f);f='';}else if(c=='\n'){row.push(f);out.push(row);row=[];f='';}else if(c!='\r')f+=c;}if(f.length||row.length){row.push(f);out.push(row);}const h=out.shift();return out.filter(r=>r.length===h.length).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]])));}
+
+function filt(skip,extra){const p=Object.assign({},P,extra||{});return ROWS.filter(r=>(skip==='platform'||!p.platform||r.platform===p.platform)&&(skip==='period'||!p.period||r.period===p.period)&&(!p.mood||mood(r)===p.mood)&&(skip==='topic'||!p.topic||has(r.complaints,p.topic))&&(skip==='month'||!(p.from||p.to)||(r.exact==='1'&&(!p.from||r.month>=p.from)&&(!p.to||r.month<=p.to)))&&(!p.q||(r.text||'').indexOf(p.q)>=0));}
+
+function hbars(el,rows,label,value,color,onClick){
+ if(!rows.length){el.innerHTML='<p class="msg">لا توجد بيانات في هذا التحديد.</p>';return;}
+ const W=Math.max(280,el.clientWidth),rowH=26,top=4,H=top+rows.length*rowH+4;
+ const meas=document.createElementNS('http://www.w3.org/2000/svg','svg');meas.style.position='absolute';meas.style.visibility='hidden';document.body.appendChild(meas);
+ let lw=0;rows.forEach(d=>{const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('font-size','13');t.textContent=d[label];meas.appendChild(t);lw=Math.max(lw,t.getComputedTextLength());});meas.remove();
+ lw=Math.min(lw,W*0.45)+10;const x0=W-lw,span=Math.max(40,x0-40),mx=Math.max(...rows.map(d=>d[value]))||1;
+ let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="${esc(label)}">`;
+ rows.forEach((d,i)=>{const w=d[value]/mx*span,y=top+i*rowH;
+  s+=`<g data-i="${i}" style="cursor:${onClick?'pointer':'default'}"><title>${esc(d[label])}: ${nf.format(d[value])} مراجعة</title>`+
+  `<text x="${W}" y="${y+17}" text-anchor="end" font-size="13" fill="${css('--fg')}">${esc(d[label])}</text>`+
+  `<rect x="${x0-w}" y="${y+4}" width="${Math.max(1,w)}" height="${rowH-8}" rx="3" fill="${color(d)}"></rect>`+
+  `<text x="${x0-w-6}" y="${y+17}" text-anchor="end" font-size="12" fill="${css('--muted')}">${nf.format(d[value])}</text></g>`;});
+ el.innerHTML=s+'</svg>';
+ if(onClick)el.querySelectorAll('g[data-i]').forEach(g=>g.addEventListener('click',()=>onClick(rows[+g.dataset.i])));
+}
+function vbars(el,rows,f1,f2,max,fmt){
+ if(!rows.length){el.innerHTML='<p class="msg">لا توجد بيانات في هذا التحديد.</p>';return;}
+ const W=Math.max(280,el.clientWidth),H=230,y0=22,base=H-32,xl=6,xr=W-6,band=(xr-xl)/rows.length,bw=Math.min(54,band*(f2?0.36:0.55));
+ const y=v=>base-v/max*(base-y0);let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img"><line x1="${xl}" x2="${xr}" y1="${base}" y2="${base}" stroke="${css('--line')}"/>`;
+ rows.forEach((r,i)=>{const cx=xl+i*band+band/2;const ser=f2?[[f1,cx-bw/2-2,i===rows.length-1?css('--accent'):css('--accent-soft')],[f2,cx+bw/2+2,css('--bad-soft')]]:[[f1,cx,i===rows.length-1?css('--accent'):css('--accent-soft')]];
+  ser.forEach(([f,x,c])=>{if(r[f]==null)return;s+=`<g><title>${esc(r.period)}: ${fmt(r[f])}</title><rect x="${x-bw/2}" y="${y(r[f])}" width="${bw}" height="${base-y(r[f])}" rx="2" fill="${c}"/><text x="${x}" y="${y(r[f])-6}" text-anchor="middle" font-size="12" fill="${css('--fg')}">${fmt(r[f])}</text></g>`;});
+  s+=`<text x="${cx}" y="${base+20}" text-anchor="middle" font-size="12" fill="${css('--muted')}">${esc(SHORTP[r.period]||r.period)}</text>`;});
+ el.innerHTML=s+'</svg>';
+}
+function bcats(el,rows){
+ if(!rows.length){el.innerHTML='<p class="msg">لا توجد تقييمات بوكينق في هذا التحديد.</p>';return;}
+ const cats=[...new Set(rows.map(r=>r.category))],years=[...new Set(rows.map(r=>r.year))].sort();
+ const W=Math.max(300,el.clientWidth),rowH=40,top=36,H=top+cats.length*rowH+26,lw=Math.min(150,W*0.35),xl=24,xr=W-lw;
+ const lo=Math.max(0,Math.floor((Math.min(...rows.map(r=>r.avg))-0.3)*2)/2),x=v=>xl+(v-lo)/(10-lo)*(xr-xl);
+ const op=yv=>0.25+0.75*(years.indexOf(yv)+1)/years.length;const acc=css('--accent');
+ let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="متوسط فئات بوكينق لكل سنة">`;
+ const step=(10-lo)>2?1:0.5;for(let t=Math.ceil(lo/step)*step;t<=10.001;t+=step){s+=`<line x1="${x(t)}" x2="${x(t)}" y1="${top-16}" y2="${H-24}" stroke="${css('--grid')}"/><text x="${x(t)}" y="${H-6}" text-anchor="middle" font-size="11" fill="${css('--muted')}">${nf1.format(t)}</text>`;}
+ let lx=xr;years.slice().reverse().forEach(yv=>{s+=`<circle cx="${lx-6}" cy="12" r="6" fill="${acc}" fill-opacity="${op(yv)}"/><text x="${lx-16}" y="16" text-anchor="end" font-size="12" fill="${css('--muted')}">${yv}</text>`;lx-=62;});
+ cats.forEach((c,i)=>{const cy=top+i*rowH,pts=rows.filter(r=>r.category===c).sort((a,b)=>a.year.localeCompare(b.year)),mn=Math.min(...pts.map(p=>p.avg)),mxv=Math.max(...pts.map(p=>p.avg)),last=pts[pts.length-1];
+  s+=`<text x="${W}" y="${cy+5}" text-anchor="end" font-size="13" fill="${css('--fg')}">${esc(c)}</text><line x1="${x(mn)}" x2="${x(mxv)}" y1="${cy}" y2="${cy}" stroke="${css('--line')}" stroke-width="2"/>`;
+  pts.forEach(p=>{s+=`<circle cx="${x(p.avg)}" cy="${cy}" r="${p.year===years[years.length-1]?8:6}" fill="${acc}" fill-opacity="${op(p.year)}"><title>${esc(c)} — ${p.year}: ${nf2.format(p.avg)} (${nf.format(p.n)} تقييم)</title></circle>`;});
+  s+=`<text x="${x(mn)-12}" y="${cy+4}" text-anchor="end" font-size="12" font-weight="600" fill="${css('--fg')}">${nf2.format(last.avg)}</text>`;});
+ el.innerHTML=s+'</svg>';
+}
+
+function months(el,rs){
+ if(!rs.length){el.innerHTML='<p class="msg">لا توجد بيانات في هذا التحديد.</p>';return;}
+ rs=rs.filter(r=>r.exact==='1');if(!rs.length){el.innerHTML='<p class="msg">لا توجد بيانات في هذا التحديد.</p>';return;}
+ const ms=rs.map(r=>r.month).filter(Boolean).sort();let hi=P.to||ms[ms.length-1],lo=P.from||addMonths(hi,-11);if(lo<ms[0])lo=ms[0];
+ const seq=[];for(let m=lo;m<=hi;m=addMonths(m,1)){seq.push(m);if(seq.length>60)break;}
+ const data=seq.map(m=>{const a=rs.filter(r=>r.month===m);return{m,n:a.length,avg:a.length?mean(a.map(r=>+r.score10)):null};});
+ const W=Math.max(300,el.clientWidth),H=270,top=26,mid=118,base=H-40,xl=8,xr=W-8,band=(xr-xl)/data.length,bw=Math.max(3,Math.min(30,band*0.6));
+ const mxn=Math.max(...data.map(d=>d.n))||1,ny=v=>base-v/mxn*(base-mid-14),ay=v=>top+(10-v)/6*(mid-top);
+ const labEvery=Math.ceil(data.length/(W<500?6:12));
+ let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="عدد المراجعات ومتوسط التقييم لكل شهر">`;
+ [10,8,6,4].forEach(v=>{const yy=ay(Math.max(4,v));s+=`<line x1="${xl}" x2="${xr}" y1="${yy}" y2="${yy}" stroke="${css('--grid')}"/><text x="${xr}" y="${yy-3}" text-anchor="end" font-size="10" fill="${css('--muted')}">${nf.format(v)}</text>`;});
+ s+=`<line x1="${xl}" x2="${xr}" y1="${base}" y2="${base}" stroke="${css('--line')}"/>`;
+ let path='';data.forEach((d,i)=>{const cx=xl+i*band+band/2;if(d.avg!=null){const yy=ay(Math.max(4,d.avg));path+=(path?'L':'M')+cx+' '+yy;}});
+ s+=`<path d="${path}" fill="none" stroke="${css('--sand')}" stroke-width="2.5"/>`;
+ data.forEach((d,i)=>{const cx=xl+i*band+band/2,sel=P.from===d.m&&P.to===d.m;
+  s+=`<g data-m="${d.m}" style="cursor:pointer"><title>${fmtMonth(d.m)}: ${nf.format(d.n)} مراجعة${d.avg!=null?' · متوسط '+nf2.format(d.avg)+' من ١٠':''}</title><rect x="${xl+i*band}" y="${top-10}" width="${band}" height="${base-top+30}" fill="transparent"/>`;
+  if(d.n)s+=`<rect x="${cx-bw/2}" y="${ny(d.n)}" width="${bw}" height="${base-ny(d.n)}" rx="2" fill="${sel?css('--accent'):css('--accent-soft')}"/>`;
+  if(d.n&&(band>=26||i===data.length-1))s+=`<text x="${cx}" y="${ny(d.n)-4}" text-anchor="middle" font-size="10" fill="${css('--muted')}">${nf.format(d.n)}</text>`;
+  if(d.avg!=null)s+=`<circle cx="${cx}" cy="${ay(Math.max(4,d.avg))}" r="${d.avg<7?4.5:3}" fill="${d.avg<7?css('--bad'):css('--sand')}"/>`;
+  if(i%labEvery===0||i===data.length-1)s+=`<text x="${cx}" y="${base+16}" text-anchor="middle" font-size="11" fill="${css('--muted')}">${fmtMonth(d.m,true)}</text>`;
+  s+='</g>';});
+ s+=`<text x="${xl}" y="${top-12}" font-size="11" fill="${css('--muted')}" text-anchor="start">متوسط التقييم من ١٠ (النقطة الحمراء: أقل من ٧)</text>`;
+ el.innerHTML=s+'</svg>';
+ el.querySelectorAll('g[data-m]').forEach(g=>g.addEventListener('click',()=>{const m=g.dataset.m;if(P.from===m&&P.to===m){P.from='';P.to='';}else{P.from=m;P.to=m;}sync();render();}));
+}
+function render(){
+ const rs=filt();const n=rs.length,g=rs.filter(r=>r.platform==='قوقل'),b=rs.filter(r=>r.platform==='بوكينق');
+ const avg=mean(rs.map(r=>+r.score10));
+ $('k-n').textContent=$('lead-n').textContent=nf.format(n);
+ $('lead-avg').textContent=avg==null?'—':nf2.format(avg);
+ $('k-g').textContent=g.length?nf2.format(mean(g.map(r=>+r.stars))):'—';
+ $('k-b').textContent=b.length?nf2.format(mean(b.map(r=>+r.score10))):'—';
+ $('k-neg').textContent=n?nf.format(Math.round(rs.filter(r=>mood(r)==='neg').length/n*100))+'٪':'—';
+ $('k-rep').textContent=g.length?nf.format(Math.round(g.filter(r=>r.replied==='1').length/g.length*100))+'٪':'—';
+ const tr=filt('topic');const topics=TOPICS.map(t=>({topic:t,complaints:tr.filter(r=>has(r.complaints,t)).length,praise:tr.filter(r=>has(r.praise,t)).length}));
+ const comp=topics.filter(d=>d.complaints>0).sort((a,b)=>b.complaints-a.complaints);
+ $('lead-top').textContent=comp.length?comp[0].topic:'—';
+ hbars($('c-topics'),comp.slice(0,14),'topic','complaints',d=>!P.topic||d.topic===P.topic?css('--bad-soft'):css('--line'),d=>{P.topic=P.topic===d.topic?'':d.topic;sync();render();});
+ hbars($('c-praise'),topics.filter(d=>d.praise>0).sort((a,b)=>b.praise-a.praise).slice(0,10),'topic','praise',()=>css('--accent-soft'));
+ const pr=filt('period');const per=PERIODS.map(p=>{const a=pr.filter(r=>r.period===p),gg=a.filter(r=>r.platform==='قوقل'),gn=gg.filter(r=>mood(r)==='neg');return{period:p,n:a.length,avg10:a.length?mean(a.map(r=>+r.score10)):null,rep:gg.length?Math.round(gg.filter(r=>r.replied==='1').length/gg.length*100):null,repneg:gn.length?Math.round(gn.filter(r=>r.replied==='1').length/gn.length*100):null};});
+ vbars($('c-trend'),per.filter(r=>r.n>0),'avg10',null,10,v=>nf2.format(v));
+ vbars($('c-reply'),per.filter(r=>r.rep!=null),'rep','repneg',100,v=>nf.format(v)+'٪');
+ const bb=filt('platform',{period:''}).filter(r=>r.platform==='بوكينق'),years=[...new Set(bb.map(r=>r.month.slice(0,4)))].sort(),out=[];
+ [['staff','طاقم العمل'],['clean','النظافة'],['comfort','الراحة'],['facilities','المرافق'],['location','الموقع'],['value','القيمة مقابل المال']].forEach(([k,nm])=>years.forEach(yv=>{const v=bb.filter(r=>r.month.slice(0,4)===yv&&r[k]!=='').map(r=>+r[k]);if(v.length)out.push({category:nm,year:yv,avg:mean(v),n:v.length});}));
+ bcats($('c-bcats'),out);
+ months($('c-months'),filt('month',{from:P.from&&P.from===P.to?'':P.from,to:P.from&&P.from===P.to?'':P.to}));
+ const list=rs.filter(r=>r.text).sort((a,b)=>(b.month||'').localeCompare(a.month||'')).slice(0,200);
+ $('list-note').textContent=list.length?('يعرض أحدث '+nf.format(list.length)+' تعليق مكتوب من المراجعات المطابقة للفلاتر. التواريخ تقريبية لقوقل.'):'لا توجد تعليقات مكتوبة تطابق الفلاتر.';
+ $('list').innerHTML=list.map(r=>{const m=mood(r),rating=r.platform==='قوقل'?(r.stars+' من ٥'):(r.score10+' من ١٠'),tags=(r.complaints||'').split('|').filter(Boolean);
+  return `<tr><td class="nw" data-label="المنصة">${esc(r.platform)}</td><td class="nw ${m==='neg'?'neg':(m==='pos'?'pos':'')}" data-label="التقييم">${esc(rating)}</td><td class="nw muted" data-label="الشهر">${esc(r.month)}</td><td class="txt">${esc(r.text).replace(/\n/g,'<br>')}</td><td${tags.length?' data-label="الشكاوى"':''}>${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</td><td class="nw ${r.replied==='1'?'':'muted'}" data-label="رُدّ عليه">${r.replied==='1'?'نعم':'لا'}</td></tr>`;}).join('');
+ const chip=$('chip');chip.innerHTML='';if(P.from||P.to){const s=document.createElement('span');s.textContent='الفترة: '+(P.from&&P.from===P.to?fmtMonth(P.from):((P.from?'من '+fmtMonth(P.from):'من البداية')+' '+(P.to?'إلى '+fmtMonth(P.to):'حتى آخر شهر')));const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.from='';P.to='';sync();render();};chip.append(s,bt);}
+ if(P.topic){const s=document.createElement('span');s.textContent='معروض الآن: شكاوى «'+P.topic+'»';const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.topic='';sync();render();};chip.append(s,bt);}
+}
+function sync(){['platform','mood','topic','from','to'].forEach(k=>{$('f-'+k).value=P[k];});document.querySelectorAll('#quick button').forEach(b=>b.classList.toggle('on',!!P.from&&!P.to&&P.from===addMonths(latest(),-(+b.dataset.m-1))));}
+function latest(){let m='';ROWS.forEach(r=>{if(r.month>m)m=r.month;});return m;}
+function fillMonths(){const ms=[...new Set(ROWS.map(r=>r.month).filter(Boolean))].sort().reverse();['f-from','f-to'].forEach(id=>{const sel=$(id);ms.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=fmtMonth(m);sel.appendChild(o);});});}
+
+TOPICS.forEach(t=>{const o=document.createElement('option');o.textContent=t;$('f-topic').appendChild(o);});
+['platform','mood','topic','from','to'].forEach(k=>$('f-'+k).addEventListener('change',e=>{P[k]=e.target.value;if(P.from&&P.to&&P.from>P.to){const t=P.from;P.from=P.to;P.to=t;}sync();render();}));
+document.querySelectorAll('#quick button').forEach(b=>b.addEventListener('click',()=>{const f=addMonths(latest(),-(+b.dataset.m-1));if(P.from===f&&!P.to){P.from='';}else{P.from=f;P.to='';}sync();render();}));
+let tm;$('f-q').addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>{P.q=e.target.value.trim();render();},300);});
+$('f-reset').addEventListener('click',()=>{Object.keys(P).forEach(k=>P[k]='');$('f-q').value='';sync();render();});
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,200);});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+
+$('list-note').textContent='جارٍ تحميل البيانات…';
+Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)])
+ .then(([csv,u])=>{ROWS=parseCSV(csv);fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
+ .catch(()=>{$('list-note').textContent='تعذّر تحميل البيانات. حدّث الصفحة بعد قليل.';});
+})();
+</script>
+</body>
+</html>
