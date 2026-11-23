@@ -33,6 +33,12 @@ select{min-width:130px}
 select:focus,input:focus,button:focus{outline:2px solid var(--accent-soft);outline-offset:1px}
 input[type=search]{flex:1 1 200px;min-width:160px}
 button{background:var(--page);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.list-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.list-tools .sub{margin:0}
+#more{display:block;margin:12px auto 0}
+.flash{animation:flash 1s ease-out}
+@keyframes flash{from{box-shadow:0 0 0 3px var(--accent-soft)}to{box-shadow:var(--shadow)}}
 .quick{display:flex;gap:6px;flex-wrap:wrap}
 .quick button{border-radius:999px;padding:4px 12px;font-size:13px}
 .quick button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -104,6 +110,7 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 <select id="f-mood" aria-label="نوع التقييم"><option value="">كل التقييمات</option><option value="pos">إيجابية (8 فأعلى من 10)</option><option value="mid">متوسطة (6 إلى أقل من 8)</option><option value="neg">سلبية (أقل من 6)</option></select>
 <select id="f-topic" aria-label="موضوع الشكوى"><option value="">كل المواضيع</option></select>
 <input id="f-q" type="search" placeholder="ابحث في نص التعليقات… مثل: مسبح، سعود، نمل" aria-label="بحث في التعليقات">
+<button id="f-apply" type="button" class="primary">عرض النتائج</button>
 <button id="f-reset" type="button">مسح الفلاتر</button>
 </div>
 <div class="chip" id="chip"></div>
@@ -129,8 +136,8 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 </div>
 <div class="card" style="margin-bottom:12px"><h2>فئات بوكينق حسب السنة</h2><p class="sub">متوسط كل فئة من 10. الدائرة الأغمق هي أحدث سنة، والرقم بجانبها قيمتها.</p><div class="chart" id="c-bcats"></div></div>
 
-<div class="card"><h2>التعليقات</h2><p class="sub" id="list-note">—</p>
-<div class="tbl-wrap"><table><thead><tr><th>المنصة</th><th>التقييم</th><th>الشهر</th><th>التعليق</th><th>الشكاوى</th><th>رُدّ عليه</th></tr></thead><tbody id="list"></tbody></table></div></div>
+<div class="card" id="sec-list"><h2>التعليقات</h2><div class="list-tools"><p class="sub" id="list-note">—</p><select id="f-sort" aria-label="ترتيب التعليقات"><option value="new">الأحدث أولاً</option><option value="old">الأقدم أولاً</option><option value="low">الأقل تقييماً أولاً</option><option value="high">الأعلى تقييماً أولاً</option></select></div>
+<div class="tbl-wrap"><table><thead><tr><th>المنصة</th><th>التقييم</th><th>الشهر</th><th>التعليق</th><th>الشكاوى</th><th>رُدّ عليه</th></tr></thead><tbody id="list"></tbody></table></div><button id="more" type="button" hidden>عرض المزيد</button></div>
 
 <details><summary>كيف حُسبت الأرقام</summary><p>المصدر: كل مراجعات قوقل ماب التي يعرضها قوقل، وكل تقييمات لوحة شركاء بوكينق. وحّدنا التقييم على 10: نجوم قوقل × 2. «سلبي» أقل من 6 (أي نجمة أو نجمتان في قوقل)، و«إيجابي» 8 فأعلى. صُنّفت المواضيع آلياً بكلمات مفتاحية عربية وإنجليزية: الشكوى تعني عبارة سلبية صريحة، والمدح يعني ذكر الموضوع في تقييم إيجابي بلا شكوى. لذلك الأعداد تقريبية وغرضها ترتيب الأولويات. نحو ربع تعليقات قوقل الطويلة يعرضها قوقل مقطوعة. تتحدث البيانات أسبوعياً.</p></details>
 </div>
@@ -147,7 +154,7 @@ const mean=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
 const mood=r=>{const s=+r.score10;return s>=8?'pos':(s>=6?'mid':'neg');};
 const has=(f,t)=>(f||'').split('|').indexOf(t)>=0;
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-let ROWS=[];const P={platform:'',period:'',mood:'',topic:'',q:'',from:'',to:''};
+let ROWS=[],LIMIT=200;const P={platform:'',period:'',mood:'',topic:'',q:'',from:'',to:''};
 const AR_M=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 const fmtMonth=(m,short)=>{const [y,mo]=m.split('-').map(Number);return (short?AR_M[mo-1].slice(0,5):AR_M[mo-1])+' '+(short?String(y).slice(2):y);};
 const addMonths=(m,k)=>{let [y,mo]=m.split('-').map(Number);mo+=k;while(mo<=0){mo+=12;y--;}while(mo>12){mo-=12;y++;}return y+'-'+String(mo).padStart(2,'0');};
@@ -242,28 +249,37 @@ function render(){
  [['staff','طاقم العمل'],['clean','النظافة'],['comfort','الراحة'],['facilities','المرافق'],['location','الموقع'],['value','القيمة مقابل المال']].forEach(([k,nm])=>years.forEach(yv=>{const v=bb.filter(r=>r.month.slice(0,4)===yv&&r[k]!=='').map(r=>+r[k]);if(v.length)out.push({category:nm,year:yv,avg:mean(v),n:v.length});}));
  bcats($('c-bcats'),out);
  months($('c-months'),filt('month',{from:P.from&&P.from===P.to?'':P.from,to:P.from&&P.from===P.to?'':P.to}));
- const list=rs.filter(r=>r.text).sort((a,b)=>(b.month||'').localeCompare(a.month||'')).slice(0,200);
- $('list-note').textContent=list.length?('يعرض أحدث '+nf.format(list.length)+' تعليق مكتوب من المراجعات المطابقة للفلاتر. التواريخ تقريبية لقوقل.'):'لا توجد تعليقات مكتوبة تطابق الفلاتر.';
+ const srt=$('f-sort').value,all=rs.filter(r=>r.text).sort((a,b)=>srt==='old'?(a.month||'').localeCompare(b.month||''):srt==='low'?(+a.score10-+b.score10)||(b.month||'').localeCompare(a.month||''):srt==='high'?(+b.score10-+a.score10)||(b.month||'').localeCompare(a.month||''):(b.month||'').localeCompare(a.month||''));
+ const list=all.slice(0,LIMIT);$('more').hidden=all.length<=LIMIT;
+ $('list-note').textContent=all.length?('يعرض '+nf.format(list.length)+' من أصل '+nf.format(all.length)+' تعليقاً مكتوباً يطابق الفلاتر.'):'لا توجد تعليقات مكتوبة تطابق الفلاتر.';
  $('list').innerHTML=list.map(r=>{const m=mood(r),rating=r.platform==='قوقل'?(r.stars+' من 5'):(r.score10+' من 10'),tags=(r.complaints||'').split('|').filter(Boolean);
   return `<tr><td class="nw" data-label="المنصة">${esc(r.platform)}</td><td class="nw ${m==='neg'?'neg':(m==='pos'?'pos':'')}" data-label="التقييم">${esc(rating)}</td><td class="nw muted" data-label="الشهر">${esc(r.month)}</td><td class="txt">${esc(r.text).replace(/\n/g,'<br>')}</td><td${tags.length?' data-label="الشكاوى"':''}>${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</td><td class="nw ${r.replied==='1'?'':'muted'}" data-label="رُدّ عليه">${r.replied==='1'?'نعم':'لا'}</td></tr>`;}).join('');
- const chip=$('chip');chip.innerHTML='';if(P.from||P.to){const s=document.createElement('span');s.textContent='الفترة: '+(P.from&&P.from===P.to?fmtMonth(P.from):((P.from?'من '+fmtMonth(P.from):'من البداية')+' '+(P.to?'إلى '+fmtMonth(P.to):'حتى آخر شهر')));const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.from='';P.to='';sync();render();};chip.append(s,bt);}
+ const chip=$('chip');chip.innerHTML='';if(P.from||P.to){const s=document.createElement('span');s.textContent='الفترة: '+(P.from&&P.from===P.to?fmtMonth(P.from):((P.from?'من '+fmtMonth(P.from):'من البداية')+' '+(P.to?'إلى '+fmtMonth(P.to):'حتى آخر شهر')));const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.from='';P.to='';sync();render();};chip.append(s,bt);const ex=filt('month').filter(r=>r.exact!=='1').length;if(ex){const n=document.createElement('span');n.textContent='(استُبعدت '+nf.format(ex)+' مراجعة قوقل أقدم من سنة لأن قوقل لا يحدد شهرها)';chip.append(n);}}
  if(P.topic){const s=document.createElement('span');s.textContent='معروض الآن: شكاوى «'+P.topic+'»';const bt=document.createElement('button');bt.type='button';bt.textContent='إلغاء ×';bt.onclick=()=>{P.topic='';sync();render();};chip.append(s,bt);}
 }
 function sync(){['platform','mood','topic','from','to'].forEach(k=>{$('f-'+k).value=P[k];});document.querySelectorAll('#quick button').forEach(b=>b.classList.toggle('on',!!P.from&&!P.to&&P.from===addMonths(latest(),-(+b.dataset.m-1))));}
 function latest(){let m='';ROWS.forEach(r=>{if(r.month>m)m=r.month;});return m;}
-function fillMonths(){const ms=[...new Set(ROWS.map(r=>r.month).filter(Boolean))].sort().reverse();['f-from','f-to'].forEach(id=>{const sel=$(id);ms.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=fmtMonth(m);sel.appendChild(o);});});}
+function fillMonths(){const ms=[...new Set(ROWS.filter(r=>r.exact==='1').map(r=>r.month).filter(Boolean))].sort().reverse();['f-from','f-to'].forEach(id=>{const sel=$(id);ms.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=fmtMonth(m);sel.appendChild(o);});});}
 
 TOPICS.forEach(t=>{const o=document.createElement('option');o.textContent=t;$('f-topic').appendChild(o);});
-['platform','mood','topic','from','to'].forEach(k=>$('f-'+k).addEventListener('change',e=>{P[k]=e.target.value;if(P.from&&P.to&&P.from>P.to){const t=P.from;P.from=P.to;P.to=t;}sync();render();}));
+['platform','mood','topic','from','to'].forEach(k=>$('f-'+k).addEventListener('change',e=>{P[k]=e.target.value;if(P.from&&P.to&&P.from>P.to){const t=P.from;P.from=P.to;P.to=t;}sync();LIMIT=200;render();}));
 document.querySelectorAll('#quick button').forEach(b=>b.addEventListener('click',()=>{const f=addMonths(latest(),-(+b.dataset.m-1));if(P.from===f&&!P.to){P.from='';}else{P.from=f;P.to='';}sync();render();}));
 let tm;$('f-q').addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>{P.q=e.target.value.trim();render();},300);});
+function apply(scroll){LIMIT=200;render();const k=document.querySelector('.kpis');if(scroll&&k){k.scrollIntoView({behavior:'smooth',block:'start'});k.querySelectorAll('.card').forEach(c=>{c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash');});}}
+$('f-apply').addEventListener('click',()=>{P.q=$('f-q').value.trim();apply(true);});
+$('f-q').addEventListener('keydown',e=>{if(e.key==='Enter'){P.q=e.target.value.trim();apply(true);}});
+$('f-sort').addEventListener('change',()=>render());
+$('more').addEventListener('click',()=>{LIMIT+=200;render();});
 $('f-reset').addEventListener('click',()=>{Object.keys(P).forEach(k=>P[k]='');$('f-q').value='';sync();render();});
 let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,200);});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
 
 $('list-note').textContent='جارٍ تحميل البيانات…';
-Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)])
- .then(([csv,u])=>{ROWS=parseCSV(csv);fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
+const nowYM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');})();
+const diffM=m=>{const [y1,m1]=nowYM.split('-').map(Number),[y2,m2]=(m||nowYM).split('-').map(Number);return (y1-y2)*12+(m1-m2);};
+const perOf=m=>m<12?'آخر 12 شهراً':m<24?'قبل سنة':m<36?'قبل سنتين':m<48?'قبل 3 سنوات':'قبل 4 سنوات فأكثر';
+Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updates.csv',{cache:'no-cache'}).then(r=>r.ok?r.text():'').catch(()=>''),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)])
+ .then(([csv,upd,u])=>{const byId=new Map();parseCSV(csv).forEach(r=>byId.set(r.id,r));if(upd&&upd.trim())parseCSV(upd).forEach(r=>{if(r.id)byId.set(r.id,Object.assign(byId.get(r.id)||{},r));});ROWS=[...byId.values()];ROWS.forEach(r=>{r.period=perOf(diffM(r.month));});fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
  .catch(()=>{$('list-note').textContent='تعذّر تحميل البيانات. حدّث الصفحة بعد قليل.';});
 })();
 </script>
