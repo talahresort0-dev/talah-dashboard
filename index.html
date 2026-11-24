@@ -3,36 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>لوحة تقييمات منتجع وشاليهات تالة</title>
 <style>
-:root{--page:#f4efe5;--page2:#e9f2ef;--bg:#ffffff;--panel:#ffffff;--fg:#1f2a28;--muted:#66706d;--line:#e2e0d8;--accent:#1f7a6d;--accent-soft:rgba(31,122,109,.45);--bad:#c0392b;--bad-soft:rgba(192,57,43,.72);--ok:#2e7d4f;--grid:#eceae3;--radius:14px;--shadow:0 1px 2px rgba(30,40,38,.06),0 6px 18px rgba(30,40,38,.06);--hero1:#0e4f4a;--hero2:#1f8a78;--sand:#d9b77e}
-@media (prefers-color-scheme: dark){:root{--page:#121816;--page2:#0f1513;--bg:#1a2220;--panel:#1a2220;--fg:#e8ece9;--muted:#9aa5a1;--line:#2c3734;--accent:#4fc0ac;--accent-soft:rgba(79,192,172,.45);--bad:#e57364;--bad-soft:rgba(229,115,100,.8);--ok:#5dbb85;--grid:#26302d;--shadow:0 1px 2px rgba(0,0,0,.3);--hero1:#0b3b37;--hero2:#14695d}}
+:root{color-scheme:light;--page:#f7f5f0;--page2:#f3f6f4;--bg:#ffffff;--panel:#ffffff;--fg:#2e3432;--muted:#6f7774;--line:#e7e4dc;--accent:#2f8475;--accent-soft:rgba(47,132,117,.32);--accent-tint:#eaf4f1;--bad:#c25b4e;--bad-soft:rgba(194,91,78,.55);--bad-tint:#fbeeec;--warn:#b7791f;--warn-tint:#fbf3e4;--ok:#3a8a5c;--grid:#efede7;--radius:16px;--shadow:0 1px 2px rgba(46,52,50,.04),0 4px 14px rgba(46,52,50,.05);--sand:#c9a46a}
 *{box-sizing:border-box}
-body{margin:0;color:var(--fg);font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif;line-height:1.6;background:radial-gradient(1200px 500px at 100% 0%,rgba(217,183,126,.18),transparent 60%),linear-gradient(180deg,var(--page) 0%,var(--page2) 100%);background-attachment:fixed;min-height:100vh}
-.hero{background:linear-gradient(135deg,var(--hero1) 0%,var(--hero2) 100%);color:#fff;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:auto -10% -60px -10%;height:120px;background:radial-gradient(60% 100% at 50% 100%,rgba(217,183,126,.35),transparent 70%)}
-.hero svg.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:46px;display:block}
-.hero-in{max-width:1200px;margin:0 auto;padding:28px 16px 58px;position:relative;z-index:1}
-.hero h1{color:#fff}
-.hero .tagline{margin:0;opacity:.9;font-size:15px}
-.hero .updated{color:rgba(255,255,255,.78);margin:6px 0 0}
-.wrap{max-width:1200px;margin:-30px auto 0;padding:0 16px 40px;position:relative;z-index:2}
-h1{font-size:30px;font-weight:700;margin:0 0 4px;letter-spacing:-.2px}
-h2{font-size:17px;font-weight:600;margin:0 0 2px}
-.lead{margin:0;font-size:16px}
+body{margin:0;color:var(--fg);font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;font-size:16px;line-height:1.8;background:linear-gradient(180deg,var(--page) 0%,var(--page2) 100%);background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased}
+.hero{background:linear-gradient(135deg,#e6f2ee 0%,#f6efe2 100%);color:var(--fg);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-in{max-width:1200px;margin:0 auto;padding:26px 16px 18px;position:relative;z-index:1}
+.hero h1{color:var(--fg)}
+.hero .tagline{margin:0;color:var(--muted);font-size:16px}
+.hero .updated{color:var(--muted);margin:4px 0 0}
+.wrap{max-width:1200px;margin:0 auto;padding:18px 16px 48px;position:relative;z-index:2}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:18px;font-weight:600;margin:0 0 2px}
+.lead{margin:0;font-size:17px}
 .lead-card{border-inline-start:4px solid var(--sand);margin-bottom:14px}
-.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 10px;line-height:1.7}
 .updated{color:var(--muted);font-size:13px;margin:0 0 14px}
 .filters-card{margin-bottom:14px}
-.filters-title{font-size:13px;color:var(--muted);margin:0 0 8px}
+.filters-title{font-size:14px;color:var(--muted);margin:0 0 8px;font-weight:500}
 .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .filters + .filters{margin-top:8px}
-.flabel{font-size:13px;color:var(--muted)}
-select,input[type=search],button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.flabel{font-size:14px;color:var(--muted)}
+select,input[type=search],button,textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--bg);border:1px solid #dcd8ce;border-radius:12px;padding:8px 12px;min-height:42px}
 select{min-width:130px}
 select:focus,input:focus,button:focus{outline:2px solid var(--accent-soft);outline-offset:1px}
 input[type=search]{flex:1 1 200px;min-width:160px}
-button{background:var(--page);cursor:pointer}
+button{background:#f4f2ec;cursor:pointer}
+button:hover{background:#ece9e1}
 button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
 .list-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
 .list-tools .sub{margin:0}
@@ -40,32 +42,64 @@ button.primary{background:var(--accent);color:#fff;border-color:var(--accent);fo
 .flash{animation:flash 1s ease-out}
 @keyframes flash{from{box-shadow:0 0 0 3px var(--accent-soft)}to{box-shadow:var(--shadow)}}
 .quick{display:flex;gap:6px;flex-wrap:wrap}
-.quick button{border-radius:999px;padding:4px 12px;font-size:13px}
+.quick button{border-radius:999px;padding:4px 14px;font-size:14px;min-height:36px}
 .quick button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.chip{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:8px 0 0}
+.chip{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--muted);margin:8px 0 0}
 .chip:empty{display:none}
 .chip button{border-radius:999px;padding:2px 10px}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 .kpis .card{border-top:3px solid var(--accent)}
 .kpis .card.warn{border-top-color:var(--bad)}
-.kpi-label{color:var(--muted);font-size:13px}
-.kpi-val{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
-.kpi-note{color:var(--muted);font-size:12px}
+.kpi-label{color:var(--muted);font-size:14px}
+.kpi-val{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px;line-height:1.3}
+.kpi-note{color:var(--muted);font-size:13px}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px;margin-bottom:12px}
 .chart{position:relative;min-height:200px}
 .chart svg{display:block;width:100%;direction:ltr;overflow:visible}
 .chart text{font-family:inherit}
 .tbl-wrap{overflow-x:auto;max-height:680px;overflow-y:auto}
-table{width:100%;border-collapse:collapse;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:15px}
 th{position:sticky;top:0;background:var(--panel);text-align:right;font-weight:600;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
 td.txt{min-width:300px}
 td.nw{white-space:nowrap;font-variant-numeric:tabular-nums}
 .neg{color:var(--bad)}.pos{color:var(--ok)}.muted{color:var(--muted)}
-.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;margin:2px;color:var(--bad)}
-details{margin-top:18px;color:var(--muted);font-size:13px}
+.tag{display:inline-block;font-size:13px;background:var(--bad-tint);border-radius:999px;padding:0 10px;margin:2px;color:var(--bad)}
+details{margin-top:18px;color:var(--muted);font-size:14px}
 .msg{color:var(--muted);padding:20px 0}
+.tabs{position:sticky;top:0;z-index:20;background:rgba(247,245,240,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tabs-in{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;gap:4px}
+.tabs a{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;color:var(--muted);text-decoration:none;font-weight:500;border-bottom:3px solid transparent;font-size:16px}
+.tabs a.on{color:var(--accent);border-bottom-color:var(--accent)}
+.badge{display:inline-block;min-width:22px;padding:0 7px;border-radius:999px;background:var(--bad-tint);color:var(--bad);font-size:13px;line-height:22px;text-align:center;font-variant-numeric:tabular-nums}
+.check{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--fg);cursor:pointer;min-height:42px}
+.check input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+#view-replies{max-width:920px}
+.rlist{display:grid;gap:14px}
+.rcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-inline-start:5px solid var(--line)}
+.rcard.p-high{border-inline-start-color:var(--bad)}.rcard.p-mid{border-inline-start-color:var(--warn)}.rcard.p-low{border-inline-start-color:#c9d3cf}
+.rcard.is-done{opacity:.55}
+.rhead{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px}
+.pill{display:inline-block;padding:2px 12px;border-radius:999px;font-size:14px;font-weight:500;background:#f1efe9;color:var(--fg)}
+.pill.high{background:var(--bad-tint);color:var(--bad)}.pill.mid{background:var(--warn-tint);color:var(--warn)}.pill.low{background:#eef2f0;color:var(--muted)}
+.rmeta{color:var(--muted);font-size:14px}
+.rguest{font-weight:600}
+.rlabel{margin:12px 0 4px;font-size:14px;color:var(--muted);font-weight:500}
+.rev{margin:0;padding:12px 14px;background:#faf8f4;border-radius:12px;font-size:16px;line-height:1.9;white-space:pre-wrap}
+textarea.reply{width:100%;min-height:120px;resize:vertical;line-height:1.9;font-size:16px;padding:12px 14px;background:#fdfdfb;border-color:#cfe2dc}
+textarea.reply:focus{outline:2px solid var(--accent-soft);outline-offset:1px}
+.hint{margin:6px 0 0;font-size:14px;color:var(--warn)}
+.ractions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+a.btnlink{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border:1px solid #dcd8ce;border-radius:12px;color:var(--accent);text-decoration:none;font-size:15px;background:#fff}
+button.copied{background:var(--ok);border-color:var(--ok);color:#fff}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+@media (max-width:640px){
+ .tabs a{flex:1 1 50%;justify-content:center;padding:12px 6px;font-size:15px}
+ .rcard{padding:14px}
+ .ractions>*{flex:1 1 45%;justify-content:center}
+ .ractions .check{flex:1 1 100%}
+}
 @media (max-width:640px){
  .wrap{padding:14px 12px 30px}
  h1{font-size:22px}
@@ -85,7 +119,7 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
  td{border:0;padding:2px 0}
  td.txt{min-width:0}
  td:empty{display:none}
- td[data-label]::before{content:attr(data-label) "\00a0:\00a0";color:var(--muted);font-size:12px}
+ td[data-label]::before{content:attr(data-label) "\00a0:\00a0";color:var(--muted);font-size:13px}
 }
 </style>
 </head>
@@ -94,8 +128,9 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 <h1>لوحة تقييمات منتجع وشاليهات تالة</h1>
 <p class="tagline">تحليل آراء الضيوف في قوقل ماب وبوكينق: ما يمدحونه، وما يشتكون منه، وكيف يتغير مع الوقت.</p>
 <p class="updated" id="updated"></p>
-</div><svg class="waves" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 200 0, 400 46, 600 24 S 1000 0, 1200 26 L1200 46 L0 46 Z" fill="var(--page)" opacity=".55"/><path d="M0 38 C 250 18, 450 46, 700 32 S 1050 20, 1200 36 L1200 46 L0 46 Z" fill="var(--page)"/></svg></header>
-<div class="wrap">
+</div></header>
+<nav class="tabs" aria-label="أقسام الصفحة"><div class="tabs-in"><a href="#dash" id="t-dash" class="on">لوحة التقييمات</a><a href="#replies" id="t-rep">الردود المقترحة <span class="badge" id="rep-count">—</span></a></div></nav>
+<div class="wrap" id="view-dash">
 <div class="card lead-card"><p class="lead">في التحديد الحالي <b id="lead-n">—</b> مراجعة، متوسطها <b id="lead-avg">—</b> من 10، وأكثر موضوع يشتكي منه الضيوف فيها: «<b id="lead-top">—</b>».</p></div>
 
 <div class="card filters-card">
@@ -140,6 +175,16 @@ details{margin-top:18px;color:var(--muted);font-size:13px}
 <div class="tbl-wrap"><table><thead><tr><th>المنصة</th><th>التقييم</th><th>الشهر</th><th>التعليق</th><th>الشكاوى</th><th>رُدّ عليه</th></tr></thead><tbody id="list"></tbody></table></div><button id="more" type="button" hidden>عرض المزيد</button></div>
 
 <details><summary>كيف حُسبت الأرقام</summary><p>المصدر: كل مراجعات قوقل ماب التي يعرضها قوقل، وكل تقييمات لوحة شركاء بوكينق. وحّدنا التقييم على 10: نجوم قوقل × 2. «سلبي» أقل من 6 (أي نجمة أو نجمتان في قوقل)، و«إيجابي» 8 فأعلى. صُنّفت المواضيع آلياً بكلمات مفتاحية عربية وإنجليزية: الشكوى تعني عبارة سلبية صريحة، والمدح يعني ذكر الموضوع في تقييم إيجابي بلا شكوى. لذلك الأعداد تقريبية وغرضها ترتيب الأولويات. نحو ربع تعليقات قوقل الطويلة يعرضها قوقل مقطوعة. تتحدث البيانات أسبوعياً.</p></details>
+</div>
+
+<div class="wrap" id="view-replies" hidden>
+<div class="card lead-card"><p class="lead" id="rep-lead">جارٍ التحميل…</p><p class="sub" style="margin:6px 0 0">انسخ الرد، عدّله إن لزم، ثم الصقه في صفحة المراجعة على قوقل أو بوكينق. تعديلاتك وعلامة «رددت عليه» تُحفظ على هذا الجهاز فقط، وتختفي المراجعة من هنا تلقائياً بعد أن يظهر ردّك في التحديث الأسبوعي.</p></div>
+<div class="card filters-card"><div class="filters">
+<select id="r-pri" aria-label="الأولوية"><option value="">كل الأولويات</option><option value="عالية">أولوية عالية</option><option value="متوسطة">أولوية متوسطة</option><option value="منخفضة">أولوية منخفضة</option></select>
+<select id="r-plat" aria-label="المنصة"><option value="">كل المنصات</option><option value="قوقل">قوقل ماب</option><option value="بوكينق">بوكينق</option></select>
+<label class="check"><input type="checkbox" id="r-hide" checked> إخفاء ما رددت عليه</label>
+</div></div>
+<div id="r-list" class="rlist"></div>
 </div>
 
 <script>
@@ -272,14 +317,48 @@ $('f-sort').addEventListener('change',()=>render());
 $('more').addEventListener('click',()=>{LIMIT+=200;render();});
 $('f-reset').addEventListener('click',()=>{Object.keys(P).forEach(k=>P[k]='');$('f-q').value='';sync();render();});
 let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,200);});
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+
+let REPLIES=[],BYID=new Map();
+const GURL='https://www.google.com/maps?cid=13067058648221863650&hl=ar',BURL='https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/reviews.html?hotel_id=3690643&lang=ar';
+const PRI={'عالية':['high','p-high',0],'متوسطة':['mid','p-mid',1],'منخفضة':['low','p-low',2]};
+const ls={get:k=>{try{return localStorage.getItem(k);}catch(e){return null;}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v);}catch(e){}}};
+const isDone=r=>ls.get('talah_done_'+r.id)==='1';
+const answered=r=>{const x=BYID.get(r.id);return x&&x.replied==='1';};
+function grow(t){t.style.height='auto';t.style.height=(t.scrollHeight+4)+'px';}
+function copyText(txt){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(txt);return new Promise((ok,no)=>{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){no(e);}t.remove();});}
+function renderReplies(){
+ const pri=$('r-pri').value,plat=$('r-plat').value,hide=$('r-hide').checked;
+ const open=REPLIES.filter(r=>!answered(r));
+ const left=open.filter(r=>!isDone(r));
+ $('rep-count').textContent=nf.format(left.length);
+ const hi=left.filter(r=>r.priority==='عالية').length;
+ $('rep-lead').innerHTML=left.length?('لديك <b>'+nf.format(left.length)+'</b> مراجعة سلبية أو مختلطة بلا رد، منها <b>'+nf.format(hi)+'</b> عالية الأولوية. لكل واحدة رد مقترح جاهز للنسخ.'):'لا توجد مراجعات بانتظار الرد. أحسنت.';
+ const list=open.filter(r=>(!pri||r.priority===pri)&&(!plat||r.platform===plat)&&(!hide||!isDone(r)));
+ const el=$('r-list');
+ if(!list.length){el.innerHTML='<div class="card empty">لا توجد ردود تطابق الاختيار.</div>';return;}
+ el.innerHTML=list.map(r=>{const p=PRI[r.priority]||PRI['منخفضة'],ed=ls.get('talah_edit_'+r.id),txt=ed!=null?ed:r.reply,done=isDone(r),url=r.platform==='قوقل'?GURL:BURL;
+  return `<article class="rcard ${p[1]}${done?' is-done':''}" data-id="${esc(r.id)}"><div class="rhead"><span class="pill ${p[0]}">أولوية ${esc(r.priority)}</span><span class="pill">${esc(r.platform)}</span><span class="rmeta">${esc(r.rating)}</span><span class="rmeta">${esc((r.when||'').replace(/^'/,''))}</span><span class="rguest">${esc(r.guest)}</span></div>`+
+  `<p class="rlabel">تعليق الضيف</p><blockquote class="rev">${esc(r.review)}</blockquote>`+
+  `<p class="rlabel">الرد المقترح (يمكنك تعديله هنا)</p><textarea class="reply" aria-label="الرد المقترح">${esc(txt)}</textarea>`+
+  `<p class="hint"${/\[[^\]]+\]/.test(txt)?'':' hidden'}>عدّل ما بين القوسين [ ] قبل النشر.</p>`+
+  `<div class="ractions"><button type="button" class="primary copy">نسخ الرد</button><button type="button" class="reset"${ed!=null?'':' hidden'}>استرجاع النص المقترح</button><a class="btnlink" href="${url}" target="_blank" rel="noopener">فتح المراجعات في ${esc(r.platform)}</a><label class="check"><input type="checkbox" class="done"${done?' checked':''}> رددت عليه</label></div></article>`;}).join('');
+ el.querySelectorAll('textarea.reply').forEach(grow);
+}
+$('r-list').addEventListener('input',e=>{const t=e.target;if(!t.matches('textarea.reply'))return;const c=t.closest('.rcard'),r=REPLIES.find(x=>x.id===c.dataset.id);grow(t);ls.set('talah_edit_'+r.id,t.value===r.reply?null:t.value);c.querySelector('.reset').hidden=t.value===r.reply;c.querySelector('.hint').hidden=!/\[[^\]]+\]/.test(t.value);});
+$('r-list').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const c=b.closest('.rcard'),r=REPLIES.find(x=>x.id===c.dataset.id),t=c.querySelector('textarea');
+ if(b.classList.contains('copy')){copyText(t.value).then(()=>{b.textContent='تم النسخ ✓';b.classList.add('copied');setTimeout(()=>{b.textContent='نسخ الرد';b.classList.remove('copied');},1800);}).catch(()=>{t.focus();t.select();b.textContent='حدّد النص وانسخه';});}
+ if(b.classList.contains('reset')){t.value=r.reply;ls.set('talah_edit_'+r.id,null);grow(t);b.hidden=true;c.querySelector('.hint').hidden=!/\[[^\]]+\]/.test(t.value);}});
+$('r-list').addEventListener('change',e=>{if(!e.target.matches('input.done'))return;const c=e.target.closest('.rcard');ls.set('talah_done_'+c.dataset.id,e.target.checked?'1':null);if($('r-hide').checked&&e.target.checked){c.style.transition='opacity .4s';c.style.opacity='0';setTimeout(renderReplies,400);}else{c.classList.toggle('is-done',e.target.checked);renderReplies();}});
+['r-pri','r-plat','r-hide'].forEach(id=>$(id).addEventListener('change',renderReplies));
+function route(){const rep=location.hash==='#replies';$('view-dash').hidden=rep;$('view-replies').hidden=!rep;$('t-dash').classList.toggle('on',!rep);$('t-rep').classList.toggle('on',rep);if(!rep&&ROWS.length)render();if(rep&&REPLIES.length)renderReplies();}
+window.addEventListener('hashchange',()=>{route();window.scrollTo(0,0);});
 
 $('list-note').textContent='جارٍ تحميل البيانات…';
 const nowYM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');})();
 const diffM=m=>{const [y1,m1]=nowYM.split('-').map(Number),[y2,m2]=(m||nowYM).split('-').map(Number);return (y1-y2)*12+(m1-m2);};
 const perOf=m=>m<12?'آخر 12 شهراً':m<24?'قبل سنة':m<36?'قبل سنتين':m<48?'قبل 3 سنوات':'قبل 4 سنوات فأكثر';
-Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updates.csv',{cache:'no-cache'}).then(r=>r.ok?r.text():'').catch(()=>''),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)])
- .then(([csv,upd,u])=>{const byId=new Map();parseCSV(csv).forEach(r=>byId.set(r.id,r));if(upd&&upd.trim())parseCSV(upd).forEach(r=>{if(r.id)byId.set(r.id,Object.assign(byId.get(r.id)||{},r));});ROWS=[...byId.values()];ROWS.forEach(r=>{r.period=perOf(diffM(r.month));});fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}render();})
+Promise.all([fetch('reviews.csv',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.text();}),fetch('updates.csv',{cache:'no-cache'}).then(r=>r.ok?r.text():'').catch(()=>''),fetch('updated.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null),fetch('replies.csv',{cache:'no-cache'}).then(r=>r.ok?r.text():'').catch(()=>'')])
+ .then(([csv,upd,u,rep])=>{const byId=BYID;parseCSV(csv).forEach(r=>byId.set(r.id,r));if(upd&&upd.trim())parseCSV(upd).forEach(r=>{if(r.id)byId.set(r.id,Object.assign(byId.get(r.id)||{},r));});ROWS=[...byId.values()];ROWS.forEach(r=>{r.period=perOf(diffM(r.month));});fillMonths();if(u&&u.at){$('updated').textContent='آخر تحديث للبيانات: '+new Date(u.at).toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{year:'numeric',month:'long',day:'numeric'})+' · '+nf.format(ROWS.length)+' مراجعة من قوقل ماب وبوكينق';}REPLIES=rep&&rep.trim()?parseCSV(rep).filter(r=>r.id&&r.reply).sort((a,b)=>((PRI[a.priority]||PRI['منخفضة'])[2]-(PRI[b.priority]||PRI['منخفضة'])[2])||((BYID.get(b.id)||{}).month||'').localeCompare((BYID.get(a.id)||{}).month||'')):[];renderReplies();route();})
  .catch(()=>{$('list-note').textContent='تعذّر تحميل البيانات. حدّث الصفحة بعد قليل.';});
 })();
 </script>
